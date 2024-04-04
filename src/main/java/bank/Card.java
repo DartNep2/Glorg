@@ -1,27 +1,44 @@
 package bank;
 
+import java.util.*;
+
 public class Card {
-    public int getCARD_NUMBER() {
+
+    private int getCARD_NUMBER() {
         return CARD_NUMBER;
     }
 
-    public Card(int CARD_NUMBER, int pinCode) {
+    public Card(int CARD_NUMBER) {
         this.CARD_NUMBER = CARD_NUMBER;
-        this.pinCode = pinCode;
+        this.pinCode = setPinCode();
     }
 
-    public void setCARD_NUMBER(int CARD_NUMBER) {
+    private void setCARD_NUMBER(int CARD_NUMBER) {
         this.CARD_NUMBER = CARD_NUMBER;
     }
 
-    public int getPinCode() {
+    public String getPinCode() {
         return pinCode;
     }
 
-    public void setPinCode(int pinCode) {
-        this.pinCode = pinCode;
+    private String setPinCode() {
+        System.out.println("Введите новый пинкод:");
+        Scanner sc = new Scanner(System.in);
+        String pinCode = sc.nextLine();
+        int pinSize=pinCode.length();
+        if(pinSize == 4){
+            return pinCode;
+        }
+        else System.out.println("Ошибка! Ваш пинкод не подходит, поэтому вам насильно был создан подходящий:");
+        String newPinCode = "";
+        for (int i = 0; i < 4; i++) {
+            Random r = new Random();
+            newPinCode = newPinCode + r.nextInt(4);
+        }
+        System.out.println(newPinCode);
+        return newPinCode;
     }
 
     private int CARD_NUMBER;
-    private int pinCode;
+    private String pinCode;
 }
